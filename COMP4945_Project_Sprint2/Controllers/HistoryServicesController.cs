@@ -60,9 +60,9 @@ namespace COMP4945_Project_Sprint2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-            
-                bool historyServiceExist = id => {return _context.HistoryService.Any(e => e.HistoryServiceId == id);}
-                if (!historyServiceExist)
+                delegate bool Exist(int id);
+                Exist checkIfExist = id => {return _context.HistoryService.Any(e => e.HistoryServiceId == id);};
+                if (!checkIfExist(id))
                 {
                     return NotFound();
                 }

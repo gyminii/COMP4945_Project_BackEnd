@@ -60,9 +60,10 @@ namespace COMP4945_Project_Sprint2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                bool unitExist = id => {return _context.Unit.Any(e => e.UnitId == id);}
+                delegate bool Exist(int id);
+                Exist checkIfExist = id => {return _context.Unit.Any(e => e.UnitId == id);};
 
-                if (!unitExist)
+                if (!checkIfExist(id))
                 {
                     return NotFound();
                 }
