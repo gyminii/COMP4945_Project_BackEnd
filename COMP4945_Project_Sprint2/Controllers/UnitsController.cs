@@ -15,6 +15,7 @@ namespace COMP4945_Project_Sprint2.Controllers
     public class UnitsController : ControllerBase
     {
         private readonly COMP4945_Project_Sprint2Context _context;
+        delegate bool Exist(int id);
 
         public UnitsController(COMP4945_Project_Sprint2Context context)
         {
@@ -60,7 +61,6 @@ namespace COMP4945_Project_Sprint2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                delegate bool Exist(int id);
                 Exist checkIfExist = id => {return _context.Unit.Any(e => e.UnitId == id);};
 
                 if (!checkIfExist(id))

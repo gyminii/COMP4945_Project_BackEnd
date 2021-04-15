@@ -15,6 +15,7 @@ namespace COMP4945_Project_Sprint2.Controllers
     public class HistoriesController : ControllerBase
     {
         private readonly COMP4945_Project_Sprint2Context _context;
+        delegate bool Exist(int id);
 
         public HistoriesController(COMP4945_Project_Sprint2Context context)
         {
@@ -61,7 +62,6 @@ namespace COMP4945_Project_Sprint2.Controllers
             catch (DbUpdateConcurrencyException)
             {
        
-                delegate bool Exist(int id);
                 Exist checkIfExist = id => {return _context.History.Any(e => e.HistoryId == id);};
 
                 if (!checkIfExist(id))
