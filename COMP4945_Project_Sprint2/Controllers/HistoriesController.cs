@@ -60,7 +60,10 @@ namespace COMP4945_Project_Sprint2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!HistoryExists(id))
+       
+                bool historyExist = id => {return _context.History.Any(e => e.HistoryId == id);}
+
+                if (!historyExist)
                 {
                     return NotFound();
                 }
@@ -100,9 +103,9 @@ namespace COMP4945_Project_Sprint2.Controllers
             return NoContent();
         }
 
-        private bool HistoryExists(int id)
-        {
-            return _context.History.Any(e => e.HistoryId == id);
-        }
+        // private bool HistoryExists(int id)
+        // {
+        //     return _context.History.Any(e => e.HistoryId == id);
+        // }
     }
 }

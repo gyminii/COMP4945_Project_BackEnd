@@ -60,7 +60,8 @@ namespace COMP4945_Project_Sprint2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ClientExists(id))
+                bool clientExist = id => {return _context.Client.Any(e => e.ClientId == id);}
+                if (!clientExist)
                 {
                     return NotFound();
                 }
@@ -100,9 +101,9 @@ namespace COMP4945_Project_Sprint2.Controllers
             return NoContent();
         }
 
-        private bool ClientExists(int id)
-        {
-            return _context.Client.Any(e => e.ClientId == id);
-        }
+        // private bool ClientExists(int id)
+        // {
+        //     return _context.Client.Any(e => e.ClientId == id);
+        // }
     }
 }

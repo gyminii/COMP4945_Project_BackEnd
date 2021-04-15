@@ -60,10 +60,13 @@ namespace COMP4945_Project_Sprint2.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!UnitExists(id))
+                bool userExist = id => {return _context.Unit.Any(e => e.UnitId == id);}
+
+                if (!userExist)
                 {
                     return NotFound();
                 }
+
                 else
                 {
                     throw;
@@ -86,7 +89,13 @@ namespace COMP4945_Project_Sprint2.Controllers
 
         // DELETE: api/Units/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUnit(int id)
+
+
+
+        public async Task<IActionResult> 
+            
+            
+            DeleteUnit(int id)
         {
             var unit = await _context.Unit.FindAsync(id);
             if (unit == null)
@@ -100,9 +109,9 @@ namespace COMP4945_Project_Sprint2.Controllers
             return NoContent();
         }
 
-        private bool UnitExists(int id)
-        {
-            return _context.Unit.Any(e => e.UnitId == id);
-        }
+        // private bool UnitExists(int id)
+        // {
+        //     return _context.Unit.Any(e => e.UnitId == id);
+        // }
     }
 }
