@@ -48,8 +48,10 @@ namespace COMP4945_Project_Sprint2
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                // lead to custom error page depending on what error occurs (Notfound.cshtml, ErrorController.cs), only 404 currently implemented.
+                app.UseStatusCodePagesWithRedirects("/Error/{0}");
             }
+
 
             app.UseCors("AllowOrigin");
 
